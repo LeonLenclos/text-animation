@@ -8,7 +8,7 @@ Make ascii-art animations in the console. (   ' _ >')
 You can run
 
 ```
-./anim.py example.animtxt
+./anim.py anims/face1.animtxt
 ```
 
 to see an example
