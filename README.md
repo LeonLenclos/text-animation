@@ -1,6 +1,6 @@
-# console-animation
+# Text Animation
 
-Make ascii-art animations in the console. (   ' _ >')
+Make ascii-art animations in the terminal. (   ' _ >')
 
 
 ## Usage
@@ -8,12 +8,12 @@ Make ascii-art animations in the console. (   ' _ >')
 You can run
 
 ```
-./anim.py anims/face1.animtxt
+./textanimation.py eg/face1.ta
 ```
 
 to see an example
 
-## .animtxt format
+## .ta format
 
 it is just a plain text file with all the frames separated by `#`.
 
