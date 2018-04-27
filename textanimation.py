@@ -95,7 +95,7 @@ def main():
                         help='the delay between frames in seconds)')
     args = parser.parse_args()
 
-    anim = TextAnimation(read_anitxt(args.file[0]))
+    anim = TextAnimation(read_ta(args.file[0]))
     anim.read(delay=args.delay)
 
 if __name__ == '__main__':
