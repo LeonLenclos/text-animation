@@ -42,8 +42,8 @@ class TextImage(str):
 
     def show(self, x_offset=0, y_offset=0, delay=0):
         clear()
+        sys.stdout.write(y_offset * '\n')
         for line in self.get_lines():
-            sys.stdout.write(y_offset * '\n')
             sys.stdout.write(x_offset * ' ')
             sys.stdout.write(line)
             sys.stdout.write('\n')
