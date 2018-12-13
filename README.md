@@ -1,6 +1,6 @@
 # Text Animation
 
-Make ascii-art animations in the terminal. (   ' _ >')
+Make ascii-art animations in the terminal. `(   ' _ >')`
 
 
 ## Usage
