@@ -41,12 +41,15 @@ class TextImage(str):
         return len(self.get_lines())
 
     def show(self, x_offset=0, y_offset=0, delay=0):
+        """Print the TextImage and sleep during a delay."""
         clear()
         sys.stdout.write(y_offset * '\n')
         for line in self.get_lines():
             sys.stdout.write(x_offset * ' ')
             sys.stdout.write(line)
             sys.stdout.write('\n')
+        end_lines = get_term_height() - self.get_height() - y_offset - 1
+        sys.stdout.write(end_lines * '\n')
         sys.stdout.flush()
         time.sleep(delay)
 
@@ -68,31 +71,41 @@ class TextAnimation():
         """return the height of the highter frame"""
         return max(map(TextImage.get_height, self.frames))
 
-    def read(self, center=True, loop=True, delay=0.1):
-
+    def read(self, center=True, loop=0, delay=0.1):
+        """
+        Read the text animation
+        set loop to 0 for forever loop.
+        """
         x_offset = y_offset = 0
         if center:
             x_offset = int(get_term_width()/2 - self.get_width()/2)
             y_offset = int(get_term_height()/2 - self.get_height()/2)
 
-        while True:
+        i = 0
+        while i < loop or loop == 0:
             for frame in self.frames:
                 frame.show(x_offset, y_offset, delay)
-            if not loop:
-                break
+            i += 1
 
-def read_ta(file_name):
+
+def read_ta(file_name, separator='#'):
+    """
+    Read a text animation file.
+    Take a `file_name` and return a list of strings (frames of the animation).
+    In the file frames are separated by `separator` by default it is '#''
+    """
     with open(file_name, 'r') as f:
         frames = f.read().split('#')
     return [frm for frm in frames if len(frm)>0 and frm != '\n']
 
-
 def main():
     parser = argparse.ArgumentParser(description='Animate an .animtxt file.')
     parser.add_argument('file', type=str, nargs=1,
-                        help='an .animtxt file')
+                        help='an .ta (text animation) file')
     parser.add_argument('--delay', '-d', type=int, default=0.1,
-                        help='the delay between frames in seconds)')
+                        help='the delay between frames in seconds')
+    parser.add_argument('--loop', '-l', type=int, default=0,
+                        help='number of loops to play (default is infinte loop)')
     args = parser.parse_args()
 
     anim = TextAnimation(read_ta(args.file[0]))
